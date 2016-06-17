@@ -17,7 +17,6 @@ function getReposForUser(user, cb) {
     apiRequest(`${githubApi}/users/${user}/repos`, cb);
 }
 
-//function that handles the request to the github api
 function apiRequest(url, cb) {
     request(url, opts, function(error, response, body) {
         if (!error && response.statusCode == 200) {
