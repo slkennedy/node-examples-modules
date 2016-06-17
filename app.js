@@ -1,9 +1,17 @@
 var github = require("./github.js");
 
-github.getRepos("unumux", function(repos) {
+github.getReposForOrg("unumux", function(repos) {
     console.log(repos);
 });
 
-github.getRepos("github", function(repos) {
+github.getReposForOrg("github", function(repos) {
+    console.log(repos);
+});
+
+github.getReposForUser("slkennedy", function(repos) {
+    console.log(repos);
+});
+
+github.getReposForUser("chuckhendo", function(repos) {
     console.log(repos);
 });

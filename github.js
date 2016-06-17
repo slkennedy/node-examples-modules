@@ -6,8 +6,18 @@ var opts = {
   }
 };
 
-function getRepos(org, cb) {
-    request(`https://api.github.com/orgs/${org}/repos`, opts, function (error, response, body) {
+function getReposForOrg(org, cb) {
+    var requestUrl = `https://api.github.com/orgs/${org}/repos`;
+    helperFunction(requestUrl, cb)
+}
+
+function getReposForUser(user, cb) {
+    var requestUrl = `https://api.github.com/users/${user}/repos`;
+    helperFunction(requestUrl, cb)
+}
+
+function helperFunction(url, cb) {
+    request(url, opts, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var result = JSON.parse(body);
             var repoNames = result.map(function(repo) {
@@ -20,5 +30,6 @@ function getRepos(org, cb) {
 }
 
 module.exports = {
-    getRepos: getRepos
+    getReposForOrg: getReposForOrg,
+    getReposForUser: getReposForUser,
 };
