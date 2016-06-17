@@ -6,17 +6,19 @@ var opts = {
   }
 };
 
+var githubApi = "https://api.github.com";
+
+
 function getReposForOrg(org, cb) {
-    var requestUrl = `https://api.github.com/orgs/${org}/repos`;
-    helperFunction(requestUrl, cb)
+    apiRequest(`${githubApi}/orgs/${org}/repos`, cb);
 }
 
 function getReposForUser(user, cb) {
-    var requestUrl = `https://api.github.com/users/${user}/repos`;
-    helperFunction(requestUrl, cb)
+    apiRequest(`${githubApi}/users/${user}/repos`, cb);
 }
 
-function helperFunction(url, cb) {
+//function that handles the request to the github api
+function apiRequest(url, cb) {
     request(url, opts, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var result = JSON.parse(body);
